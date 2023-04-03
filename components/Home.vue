@@ -24,10 +24,25 @@
               <div class="row">
                 <div class="p-2 col-md-4" v-for="(album, albumKey) in searchResults.albums.results.albummatches.album" :key="albumKey">
 
+                  <div class="shadow p-2 album-card rounded-lg">
+                    <NuxtLink :to="`album?mbid=${album.mbid}&name=${album.name}&artist=${album.artist}`">
+                      <h3>{{album.name}}</h3>
+                      <h4 class="text-muted">By {{album.artist}}</h4>
+                      <img class="img-fluid w-100" :src="album.image[album.image.length-1]['#text']" />
+                    </NuxtLink>
+                   </div>
+                </div>
+              </div>
+            </div>
+            <div v-if="searchResults.artists.results.artistmatches.artist">
+              <h2>Artists</h2>
+              <div class="row">
+                <div class="p-2 col-md-4" v-for="(artist, artistKey) in searchResults.artists.results.artistmatches.artist" :key="artistKey">
+
                   <div class="shadow p-2 rounded-lg">
-                    <h3>{{album.name}}</h3>
-                    <h4 class="text-muted">{{album.artist}}</h4>
-                    <img class="img-fluid w-100" :src="album.image[album.image.length-1]['#text']" />
+                    <h3>{{artist.name}}</h3>
+                    <h4 class="text-muted">{{artist.listeners.toLocaleString()}} Listeners</h4>
+                    <!-- <img class="img-fluid w-100" :src="artist.image[artist.image.length-1]['#text']" /> -->
                    </div>
                 </div>
               </div>
@@ -38,7 +53,7 @@
     </div>
   </div>
 </template>
-<style scoped>
+<style lang="scss" scoped>
   .logo img{
     max-width: 200px;
   }
@@ -47,6 +62,10 @@
     justify-content: center;
     align-items: center;
     
+  }
+  .album-card a{
+    text-decoration: none;
+    color: inherit;
   }
 </style>
 <script>
