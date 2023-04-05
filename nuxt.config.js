@@ -40,11 +40,24 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
+    '@nuxtjs/toast',
   ],
 
   axios: {
     // Axios options here
     baseURL: process.env.API_HOST
+  },
+  toast: {
+    position: 'bottom-right',
+    register: [ // Register custom toasts
+      {
+        name: 'my-error',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error'
+        }
+      }
+    ]
   },
   publicRuntimeConfig: {
     axios: {

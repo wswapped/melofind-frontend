@@ -22,7 +22,7 @@
                 <div class="p-2 col-md-4" v-for="(album, albumKey) in searchResults.albums.results.albummatches.album" :key="albumKey">
 
                   <div class="shadow p-2 album-card rounded-lg">
-                    <NuxtLink :to="`album?mbid=${album.mbid}&artist=${album.artist}`">
+                    <NuxtLink :to="`album?mbid=${album.mbid}&name=${album.name}&artist=${album.artist}`">
                       <h3>{{album.name}}</h3>
                       <h4 class="text-muted">By {{album.artist}}</h4>
                       <img class="img-fluid w-100" :src="album.image[album.image.length-1]['#text']" />
@@ -37,7 +37,7 @@
                 <div class="p-2 col-md-4" v-for="(artist, artistKey) in searchResults.artists.results.artistmatches.artist" :key="artistKey">
 
                   <div class="shadow p-2 rounded-lg">
-                    <NuxtLink class="text-reset" :to="`artist?mbid=${artist.mbid}&name=${artist.name}&artist=${artist.artist}`">
+                    <NuxtLink class="text-reset" :to="`artist?mbid=${artist.mbid}&name=${artist.name}`">
                       <h3>{{artist.name}}</h3>
                     </NuxtLink>
                     <h4 class="text-muted">{{artist.listeners.toLocaleString()}} Listeners</h4>
