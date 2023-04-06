@@ -82,7 +82,12 @@ export default {
         .then((response) => {
           console.log(response);
           this.state.searching = false;
-          this.searchResults = response.data;
+          let data = response.data
+          this.searchResults = data;
+
+          if(data.error){
+            this.$toast.error(data.message);
+          }
         });
     } else {
       // TODO: proper error

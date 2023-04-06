@@ -3,23 +3,14 @@
     <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
       <div class="mt-4 home-content d-flex bg-white overflow-hidden sm:rounded-lg container">
         <div>
-          <p class="mt-3 text-gray-600">
-          Search your favorite artist or album
-          </p>
-          <form class="form" @submit="search">
-            <input class="form-control" type="text" placeholder="Artist or album" required v-model="searchQuery" />
-            <div class="mt-3 d-flex justify-content-center">
-              <button class="btn btn-primary">
-                <template v-if="!state.searching">Search</template>
-                <template v-else>Searching ...</template>
-              </button>
-            </div>
-          </form>
+          <h1 class="mt-3">
+          Your favorite artists and albums
+          </h1>
           <div v-if="searchResults">
-            <div v-if="searchResults.albums.results.albummatches.album">
+            <div v-if="searchResults.albums">
               <h2>Albums</h2>
               <div class="row">
-                <div class="p-2 col-md-4" v-for="(album, albumKey) in searchResults.albums.results.albummatches.album" :key="albumKey">
+                <div class="p-2 col-md-4" v-for="(album, albumKey) in searchResults.albums" :key="albumKey">
 
                   <div class="shadow p-2 album-card rounded-lg">
                     <NuxtLink :to="`album?mbid=${album.mbid}&name=${album.name}&artist=${album.artist}`">
@@ -31,18 +22,16 @@
                 </div>
               </div>
             </div>
-            <div v-if="searchResults.artists.results.artistmatches.artist">
+            <div v-if="searchResults.artists">
               <h2>Artists</h2>
               <div class="row">
-                <div class="p-2 col-md-4" v-for="(artist, artistKey) in searchResults.artists.results.artistmatches.artist" :key="artistKey">
-
+                <div class="p-2 col-md-4" v-for="(artist, artistKey) in searchResults.artists" :key="artistKey">
                   <div class="shadow p-2 rounded-lg">
                     <NuxtLink class="text-reset" :to="`artist?mbid=${artist.mbid}&name=${artist.name}`">
                       <h3>{{artist.name}}</h3>
                     </NuxtLink>
-                    <h4 class="text-muted">{{artist.listeners.toLocaleString()}} Listeners</h4>
-                    <!-- <img class="img-fluid w-100" :src="artist.image[artist.image.length-1]['#text']" /> -->
-                   </div>
+                    <h4 class="text-muted">{{artist.stats.listeners.toLocaleString()}} Listeners</h4>
+                  </div>
                 </div>
               </div>
             </div>
@@ -66,7 +55,10 @@
 </style>
 <script>
 export default {
-  name: 'Home',
+  name: 'FavoritesPage',
+  head: {
+    title: `Favorites | ${process.env.APP_NAME}`,
+  },
   data(){
     return {
       state:{
@@ -76,19 +68,20 @@ export default {
       searchResults: null,
     }
   },
+  mounted(){
+    // Get favorited contents
+    this.getFavorites()
+  },
   methods:{
-    search(ev){
-      ev.preventDefault()
+    getFavorites(){
       this.state.searching = true
-      this.$axios.get(`search?searchQuery=${this.searchQuery}`)
+      this.$axios.get(`favorites`)
         .then((response) => {
           console.log(response)
           this.state.searching = false
           this.searchResults = response.data
         })
-    }
+    },
   }
 }
 </script>
-
-

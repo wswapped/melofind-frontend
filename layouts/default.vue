@@ -20,7 +20,7 @@
           <ul class="navbar-nav mr-auto" >
             <template v-if="user">
               <li class="nav-item">
-                <a class="nav-link" href="#">My favorites</a>
+                <NuxtLink class="nav-link" to="favorites">My favorites</NuxtLink>
               </li>
             </template>
           </ul>
