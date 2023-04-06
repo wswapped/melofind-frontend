@@ -1,0 +1,19 @@
+@use "sass:map";
+$theme-colors: (
+  'primary': #840b96,
+//   'secondary': #833bec,
+//   'success': #1ce1ac,
+//   'info': #ff7d50,
+//   'warning': #ffbe0b,
+//   'danger': #ff007f,
+//   'light': #c0ccda,
+//   'dark': #001738,
+);
+$font-family-base: Manrope, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+.btn-primary{
+    border: 0;
+    background: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%);
+}
+
+@import '~/node_modules/bootstrap/scss/bootstrap.scss';

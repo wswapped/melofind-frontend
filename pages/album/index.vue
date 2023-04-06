@@ -1,23 +1,24 @@
 <template>
-  <div class="container-fluid">
-    <div v-if="album">
+  <div class="container">
+    <div class="mt-5" v-if="album">
       <div class="row">
         <div class="col-md-5">
-          <h1>{{ album.name }}</h1>
-          <h2 class="text-muted">by {{ album.artist }}</h2>
+          <h1 class="mt-3">{{ album.name }}</h1>
+          <h3 class="text-muted mt-0">by {{ album.artist }}</h3>
           <ol>
             <li>Listeners: {{ album.listeners?.toLocaleString() }}</li>
             <li>Plays: {{ album.playcount?.toLocaleString() }}</li>
           </ol>
+          <button @click="() => addToFavorite()" class="btn btn-primary mr-3">
+            Favorite
+          </button>
           <a
             :href="album.url"
-            class="btn btn-primary text-white text-reset"
+            class="btn btn-outline-primary text-white text-reset"
             target="_blank"
             >Play</a
           >
-          <button @click="() => addToFavorite()" class="btn btn-primary">
-            Favorite
-          </button>
+          
         </div>
         <div class="col-md-5">
           <img :src="album.image[album.image.length - 1]['#text']" />

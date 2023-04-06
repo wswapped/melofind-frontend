@@ -1,23 +1,24 @@
 <template>
   <div class="container-fluid">
-    <div v-if="artist">
+    <div class="mt-5" v-if="artist">
       <div class="row">
         <div class="col-md-5">
-          <h1>{{ artist.name }}</h1>
+          <h1 class="mt-3 my-2">{{ artist.name }}</h1>
           <ol>
             <li>Listeners: {{ artist.stats.listeners.toLocaleString() }}</li>
             <li>Plays: {{ artist.stats.playcount.toLocaleString() }}</li>
           </ol>
+          <button @click="() => addToFavorite()" class="btn btn-primary mr-3">
+            Favorite
+          </button>
           <a
             :href="artist.url"
-            class="btn btn-primary text-white text-reset"
+            class="btn btn-outline-primary text-white text-reset"
             target="_blank"
             >Play</a
           >
-          <button @click="() => addToFavorite()" class="btn btn-primary">
-            Favorite
-          </button>
-          <div>
+         
+          <div class="mt-4">
             <a
               class="d-inline"
               v-for="(tag, smKey) in artist.tags.tag"
@@ -33,7 +34,8 @@
         </div>
 
         <div class="col-12">
-          <div v-if="artist.bio">
+          <div class="my-4" v-if="artist.bio">
+            <h3 class="my-3">Bio</h3>
             <p v-html="artist.bio.summary"></p>
             <p>
               <i>{{ artist.bio.published }}</i>
@@ -41,8 +43,11 @@
           </div>
 
           <div class="row">
+            <div class="col-12">
+              <h2 class="my-3">Similar artists</h2>
+            </div>
             <div
-              class="col-md-4"
+              class="col-md-3"
               v-for="(similarArtist, smKey) in artist.similar.artist"
               :key="smKey"
             >

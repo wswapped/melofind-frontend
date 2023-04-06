@@ -21,11 +21,13 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/scss/custom.scss',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/axios'
+    '~/plugins/axios',
+    '~/plugins/bootstrap',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -33,6 +35,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxtjs/google-fonts'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -58,6 +61,13 @@ export default {
         }
       }
     ]
+  },
+  googleFonts: {
+    families: {
+      Raleway: true,
+      Manrope: true,
+      'Josefin+Sans': true,
+    }
   },
   publicRuntimeConfig: {
     axios: {

@@ -3,12 +3,10 @@
     <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
       <div class="mt-4 home-content d-flex bg-white overflow-hidden sm:rounded-lg container">
         <div>
-          <h1 class="mt-3">
-          Your favorite artists and albums
-          </h1>
+          <h1 class="mt-3 mb-4">Your favorite artists and albums</h1>
           <div v-if="searchResults">
             <div v-if="searchResults.albums">
-              <h2>Albums</h2>
+              <h2 class="my-3">Albums</h2>
               <div class="row">
                 <div class="p-2 col-md-4" v-for="(album, albumKey) in searchResults.albums" :key="albumKey">
 
@@ -22,8 +20,8 @@
                 </div>
               </div>
             </div>
-            <div v-if="searchResults.artists">
-              <h2>Artists</h2>
+            <div class="mt-4" v-if="searchResults.artists">
+              <h2 class="my-2">Artists</h2>
               <div class="row">
                 <div class="p-2 col-md-4" v-for="(artist, artistKey) in searchResults.artists" :key="artistKey">
                   <div class="shadow p-2 rounded-lg">

@@ -28,10 +28,10 @@
             <div v-if="user" class="d-flex align-items-center">
               <img class="profile_img" :src="user.profile_img" />
               <p class="mb-0 ml-2 mr-2">{{ user.name }}</p>
-              <NuxtLink to="logout" class="btn btn-info">Logout</NuxtLink>
+              <NuxtLink to="logout" class="btn btn-outline-primary">Logout</NuxtLink>
             </div>
             <div v-else>
-              <button @click="() => triggerLogin()" class="btn btn-primary">Login</button>
+              <button @click="() => triggerLogin()" class="btn btn-outline-primary">Login</button>
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@
           <form class="form" @submit="search">
             <input class="form-control" type="text" placeholder="Artist or album" required v-model="searchQuery" />
             <div class="mt-3 d-flex justify-content-center">
-              <button class="btn btn-primary">
+              <button class="btn px-4 btn-primary">
                 <template v-if="!state.searching">Search</template>
                 <template v-else>Searching ...</template>
               </button>
