@@ -52,6 +52,7 @@ export default {
   },
   toast: {
     position: 'bottom-right',
+    duration: 2000,
     register: [ // Register custom toasts
       {
         name: 'my-error',

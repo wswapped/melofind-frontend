@@ -11,7 +11,8 @@
                 <div class="p-2 col-md-4" v-for="(album, albumKey) in searchResults.albums" :key="albumKey">
 
                   <div class="shadow p-2 album-card rounded-lg">
-                    <NuxtLink :to="`album?mbid=${album.mbid}&name=${album.name}&artist=${album.artist}`">
+                    <!-- <NuxtLink :to="`album?mbid=${album.mbid}&name=${album.name}&artist=${album.artist}`"> -->
+                    <NuxtLink :to="`album?${generateParams({mbid: album.mbid, name: album.name, artist: album.artist})}`">
                       <h3>{{album.name}}</h3>
                       <h4 class="text-muted">By {{album.artist}}</h4>
                       <img class="img-fluid w-100" :src="album.image[album.image.length-1]['#text']" />
@@ -52,6 +53,7 @@
   }
 </style>
 <script>
+import { generateUrlParams } from '@/plugins/helper';
 export default {
   name: 'FavoritesPage',
   head: {
@@ -80,6 +82,9 @@ export default {
           this.searchResults = response.data
         })
     },
+    generateParams(params){
+      return generateUrlParams(params)
+    }
   }
 }
 </script>
