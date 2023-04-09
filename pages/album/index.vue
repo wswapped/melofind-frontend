@@ -9,12 +9,12 @@
             <li>Listeners: {{ album.listeners?.toLocaleString() }}</li>
             <li>Plays: {{ album.playcount?.toLocaleString() }}</li>
           </ol>
-          <button @click="() => addToFavorite()" class="btn btn-primary mr-3">
+          <button v-if="state.loadedFavorite" @click="() => toggleFavorite()" class="btn mr-3" :class="isFavorite?'btn-primary':'btn-outline-primary'">
             Favorite
           </button>
           <a
             :href="album.url"
-            class="btn btn-outline-primary text-white text-reset"
+            class="btn btn-outline-primary text-white text-primary"
             target="_blank"
             >Play</a
           >
@@ -52,8 +52,11 @@ export default {
         mbid: null,
       },
       state: {
+        loadedFavorite: false,
         searching: false,
       },
+      isFavorite: null,
+      favoriteId: null,
       searchResults: null,
       error: null,
     };
@@ -64,14 +67,13 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$route.query);
     let albumQ = {
       name: this.$route.query.name,
       artist: this.$route.query.artist,
       mbid: this.$route.query.mbid,
     };
 
-    // Check if required fields are present
+    // Check if required album fields are present
     if (albumQ.mbid || (albumQ.name && albumQ.artist)) {
       this.state.searching = true;
       this.$axios
@@ -88,14 +90,49 @@ export default {
 
           if(data.error){
             this.$toast.error(data.message);
+          }else{
+            this.checkFavorite()
           }
         });
     } else {
-      // TODO: proper error
-      alert("Error");
+      // Show an error that all fields are not provided to be able to load the album
+      this.$toast.error('All necessary fields were not sent, try again', {
+        duration: null
+      });
     }
   },
   methods: {
+    checkFavorite(){
+      this.$axios
+        .post("album_favorite/check", {
+          ...this.album,
+        })
+        .then((response) => {
+          this.state.loadedFavorite = true
+          this.isFavorite = response.data.favorite
+          let message = null;
+          if(this.isFavorite){
+            this.favoriteId = response.data.id
+            message = 'This is your favorite 🤗'
+          }else{
+            message = 'You can add this album to your favorites if you it'
+          }
+          this.$toast.info(message);
+        })
+        .catch(({ response }) => {
+          this.$toast.error(response.data.message);
+        });
+    },
+    toggleFavorite(){
+      // we can do action when we know if the app checked if this album is a favorite or not
+      if(this.state.loadedFavorite){
+        if(this.isFavorite){
+          this.removeFavorite()
+        }else{
+          this.addToFavorite()
+        }
+      }
+    },
     addToFavorite() {
       // Adds current album to favorite
 
@@ -104,12 +141,30 @@ export default {
           ...this.album,
         })
         .then((response) => {
+          this.isFavorite = true
           this.$toast.success(response.data.message);
         })
         .catch(({ response }) => {
           console.log(response);
           this.$toast.error(response.data.message);
         });
+    },
+    removeFavorite() {
+      // remove current album from favorite
+      let confirmRemoval = confirm(`Are you sure you want to remove ${this.album.name} from your favorites 😫`)
+      if(confirmRemoval){
+        this.$axios
+          .delete(`album_favorite/${this.favoriteId}`,)
+          .then((response) => {
+            this.isFavorite = false
+            this.$toast.success(response.data.message);
+          })
+          .catch(({ response }) => {
+            this.$toast.error(response.data.message);
+          });
+      }else{
+        this.$toast.success(`Keep having fun with ${this.album.name} 🤗`);
+      }
     },
   },
 };

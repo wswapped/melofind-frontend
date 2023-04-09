@@ -81,8 +81,6 @@
               <h4><a :href="similarArtist.url" class="text-reset" target="_blank">{{ similarArtist.name }}</a></h4>
             </div>
           </div>
-
-          
         </div>
       </div>
     </div>
