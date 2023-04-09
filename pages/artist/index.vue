@@ -78,7 +78,7 @@
               v-for="(similarArtist, smKey) in artist.similar.artist"
               :key="smKey"
             >
-              <h4><a :href="similarArtist.url" class="text-reset" target="_blank">{{ similarArtist.name }}</a></h4>
+              <h4><a :href="`artist?name=${similarArtist.name}`" class="text-reset">{{ similarArtist.name }}</a></h4>
             </div>
           </div>
         </div>

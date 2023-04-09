@@ -81,6 +81,9 @@ export default {
       baseURL: process.env.API_HOST
     }
   },
+  env:{
+    APP_NAME: process.env.APP_NAME
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
