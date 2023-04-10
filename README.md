@@ -1,4 +1,20 @@
-# melofinder
+# Melofinder
+
+The project is built with Nuxt a Vue framework
+
+It can be run in docker or in your local system
+
+Before running the project `.env` file should be created from `.env.example` template
+
+In the template there are below variables that should be setup
+
+- `API_HOST` this is the host which API is running on, default can be kept if there was no change
+
+- `APP_NAME` The name of the app to be shown on frontend like titles
+
+## Docker setup
+
+run `docker-compose up` to start the frontend service
 
 ## Build Setup
 
@@ -19,27 +35,6 @@ $ yarn generate
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
-## Special Directories
-
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
-
-### `assets`
-
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
-
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
 
 
 ### `pages`
@@ -67,6 +62,7 @@ More information about the usage of this directory in [the documentation](https:
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
 
 
 ##  API issues
