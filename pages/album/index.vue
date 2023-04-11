@@ -24,12 +24,13 @@
           <img :src="album.image[album.image.length - 1]['#text']" />
         </div>
         <div class="col-12">
+          <h3>Tracks</h3>
           <ol>
             <li
               v-for="(track, trackKey) in album.tracks?.track"
               :key="trackKey"
             >
-              {{ track.name }}
+              <a :href="track.url" target="_blank" class="text-reset">{{ track.name }}</a>
             </li>
           </ol>
         </div>

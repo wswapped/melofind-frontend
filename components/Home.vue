@@ -32,7 +32,7 @@
               </div>
             </div>
             <div v-if="searchResults.artists.results.artistmatches.artist">
-              <h2>Artists</h2>
+              <h2 class="my-3">Artists</h2>
               <div class="row">
                 <div class="p-2 col-md-4" v-for="(artist, artistKey) in searchResults.artists.results.artistmatches.artist" :key="artistKey">
 
